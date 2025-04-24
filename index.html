@@ -1,1119 +1,550 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Odoo & LINKUP INFOTECH - 모든 비즈니스를 위한 통합 플랫폼</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odoo - 모든 비즈니스를 하나의 플랫폼에서</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: "#0066CC",
-                        secondary: "#7B8A99"
-                    },
-                    borderRadius: {
-                        none: "0px",
-                        sm: "4px",
-                        DEFAULT: "8px",
-                        md: "12px",
-                        lg: "16px",
-                        xl: "20px",
-                        "2xl": "24px",
-                        "3xl": "32px",
-                        full: "9999px",
-                        button: "8px",
-                    },
-                },
-            },
-        };
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6',secondary:'#6366f1'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
     <style>
-         :where([class^="ri-"])::before {
-            content: "\f3c2";
-        }
-        
+        :where([class^="ri-"])::before { content: "\f3c2"; }
         body {
-            font-family: "Noto Sans KR", sans-serif;
-            color: #333;
+            font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
         }
-        
         .hero-section {
-            background-image: linear-gradient( to right, rgba(255, 255, 255, 0.9) 45%, rgba(255, 255, 255, 0.7) 55%, rgba(255, 255, 255, 0.3) 70%, rgba(255, 255, 255, 0) 100%), url("https://readdy.ai/api/search-image?query=Modern%20minimalist%20office%20space%20with%20blue%20and%20gray%20color%20scheme%2C%20clean%20professional%20environment%2C%20technology%20focused%20workspace%20with%20subtle%20lighting%2C%20high-end%20corporate%20atmosphere%2C%20sleek%20and%20sophisticated%20design%20elements&width=1920&height=1080&seq=hero1&orientation=landscape");
+            background-image: url('https://readdy.ai/api/search-image?query=dark%20blue%20gradient%20background%20with%20particle%20effects%2C%20digital%20transformation%20concept%2C%20abstract%20technology%20visualization%2C%20professional%20business%20theme%2C%20high%20quality%2C%20modern%20design&width=1920&height=800&seq=12345&orientation=landscape');
             background-size: cover;
-            background-position: center right;
+            background-position: center;
         }
-        
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        input:focus {
-            outline: none;
-            border-color: #875a7b;
-        }
-        
-        .custom-checkbox {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #875a7b;
-            border-radius: 4px;
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .custom-checkbox:checked {
-            background-color: #875a7b;
-        }
-        
-        .custom-checkbox:checked::after {
-            content: "";
+        .scroll-indicator::after {
+            content: '';
             position: absolute;
-            top: 2px;
-            left: 6px;
-            width: 6px;
-            height: 10px;
-            border: solid white;
-            border-width: 0 2px 2px 0;
-            transform: rotate(45deg);
+            width: 2px;
+            height: 40px;
+            background-color: white;
+            left: 50%;
+            animation: scrollDown 2s infinite;
         }
-        
-        .testimonial-slider {
-            scroll-snap-type: x mandatory;
+        @keyframes scrollDown {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(20px); opacity: 0; }
         }
-        
-        .testimonial-slide {
-            scroll-snap-align: start;
+        .partner-logos {
+            animation: scroll 30s linear infinite;
         }
-        
-        .header-shadow {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        input:focus, button:focus {
+            outline: none;
         }
     </style>
 </head>
-
 <body class="bg-white">
-    <!-- Header -->
-    <header class="fixed w-full bg-white border-b border-gray-100 z-50 transition-all duration-300 header-shadow">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#" class="text-primary font-bold text-2xl tracking-wider">JK SOFTLAB</a
-        >
-        <nav class="hidden md:flex space-x-8">
-          <a
-            href="#features"
-            class="text-gray-700 hover:text-primary transition-colors"
-            >특징</a
-          >
-          <a
-            href="#value"
-            class="text-gray-700 hover:text-primary transition-colors"
-            >가치</a
-          >
-          <a
-            href="#testimonials"
-            class="text-gray-700 hover:text-primary transition-colors"
-            >고객 후기</a
-          >
-          <a
-            href="#process"
-            class="text-gray-700 hover:text-primary transition-colors"
-            >프로세스</a
-          >
-        </nav>
-        <button
-          class="hidden md:block bg-primary text-white px-5 py-2 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
-        >
-          무료 데모 신청
-        </button>
-        <div class="md:hidden w-8 h-8 flex items-center justify-center">
-          <i class="ri-menu-line ri-lg"></i>
+    <!-- 헤더 -->
+    <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#" class="text-2xl font-['Pacifico'] text-primary">logo</a>
+            
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#" class="text-gray-800 hover:text-primary font-medium">제품소개</a>
+                <a href="#" class="text-gray-800 hover:text-primary font-medium">가격</a>
+                <a href="#" class="text-gray-800 hover:text-primary font-medium">파트너</a>
+                <a href="#" class="text-gray-800 hover:text-primary font-medium">리소스</a>
+                <a href="#" class="text-gray-800 hover:text-primary font-medium">연락처</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <button class="flex items-center text-gray-700 hover:text-primary">
+                        <span>한국어</span>
+                        <i class="ri-arrow-down-s-line ml-1"></i>
+                    </button>
+                </div>
+                <button class="bg-primary text-white px-4 py-2 !rounded-button whitespace-nowrap">로그인</button>
+            </div>
         </div>
-      </div>
     </header>
-    <!-- Hero Section -->
-    <section class="hero-section min-h-[650px] flex items-center pt-20">
-      <div class="container mx-auto px-4 py-16 w-full">
-        <div class="max-w-2xl">
-          <h1
-            class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6"
-          >
-            모든 비즈니스, 하나의 플랫폼 – Odoo & JK SOFTLAB
-          </h1>
-          <h2 class="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed">
-            70+ 앱으로 회계·제조·CRM·전자상거래를 통합하고, 한국 1위 Odoo
-            파트너가 구현까지 책임집니다.
-          </h2>
-          <button
-            class="bg-primary text-white px-8 py-3 !rounded-button text-lg hover:bg-opacity-90 transition-colors flex items-center whitespace-nowrap"
-          >
-            무료 컨설팅 받기
-            <div class="w-6 h-6 ml-2 flex items-center justify-center">
-              <i class="ri-arrow-right-line"></i>
+
+    <!-- 히어로 섹션 -->
+    <section class="hero-section w-full h-screen flex items-center justify-center text-white relative pt-16">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Odoo – 모든 비즈니스를 하나의 플랫폼에서</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">CRM부터 회계·재고·제조까지, 필요한 기능만 모듈로 선택하세요.</p>
+            <button class="bg-primary hover:bg-blue-600 text-white text-lg px-8 py-3 !rounded-button shadow-lg whitespace-nowrap">무료 데모 신청</button>
+            
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator w-6 h-10 border-2 border-white rounded-full flex justify-center pt-2">
+                <div class="w-1 h-1 bg-white rounded-full"></div>
             </div>
-          </button>
         </div>
-      </div>
     </section>
-    <!-- Features Section -->
-    <section id="features" class="py-20 bg-[#F6F7F9]">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-4">
-          비즈니스 통합의 새로운 기준
-        </h2>
-        <p class="text-gray-600 text-center mb-12 max-w-3xl mx-auto">
-          Odoo의 강력한 기능과 LINKUP INFOTECH의 전문성이 만나 비즈니스
-          프로세스를 혁신합니다.
-        </p>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <!-- Feature 1 -->
-          <div
-            class="bg-white rounded-2xl p-6 shadow-sm card-hover transition-all duration-300"
-          >
-            <div
-              class="w-16 h-16 mb-5 flex items-center justify-center text-primary"
-            >
-              <i class="ri-database-2-line ri-3x"></i>
+
+    <!-- 핵심 모듈 소개 -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">핵심 모듈 소개</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">비즈니스 운영에 필요한 모든 기능을 하나의 플랫폼에서 이용하세요.</p>
+                <div class="inline-block bg-blue-100 text-primary px-4 py-1 rounded-full mt-4 text-sm font-medium">+ 40,000 여 개 앱스토어 모듈</div>
             </div>
-            <h3 class="text-xl font-semibold mb-3">올-인-원 솔루션</h3>
-            <p class="text-gray-600">
-              판매부터 생산·재무·HR까지 하나의 데이터베이스로 통합 관리합니다.
-            </p>
-          </div>
-          <!-- Feature 2 -->
-          <div
-            class="bg-white rounded-2xl p-6 shadow-sm card-hover transition-all duration-300"
-          >
-            <div
-              class="w-16 h-16 mb-5 flex items-center justify-center text-secondary"
-            >
-              <i class="ri-puzzle-line ri-3x"></i>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 모듈 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-customer-service-2-line text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">CRM</h3>
+                    <p class="text-gray-600">고객 파이프라인을 시각화하여 영업 속도 향상</p>
+                </div>
+                
+                <!-- 모듈 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-bank-card-line text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">회계</h3>
+                    <p class="text-gray-600">세금, 송장, 재무 보고를 자동화</p>
+                </div>
+                
+                <!-- 모듈 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-store-2-line text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">재고</h3>
+                    <p class="text-gray-600">실시간 재고 현황 및 구매 주문 통합 관리</p>
+                </div>
+                
+                <!-- 모듈 4 -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-tools-line text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">제조(MRP)</h3>
+                    <p class="text-gray-600">작업 지시서·품질 체크·설비 유지보수까지</p>
+                </div>
+                
+                <!-- 모듈 5 -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-team-line text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">인사(HR)</h3>
+                    <p class="text-gray-600">채용부터 급여·휴가까지 직원 Lifecycle 관리</p>
+                </div>
+                
+                <!-- 모듈 6 -->
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-calendar-check-line text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">프로젝트</h3>
+                    <p class="text-gray-600">간트 차트와 일정 Kanban으로 업무 진행률 확인</p>
+                </div>
             </div>
-            <h3 class="text-xl font-semibold mb-3">모듈식 확장</h3>
-            <p class="text-gray-600">
-              클릭 한 번으로 70+ 앱과 수천 개 커뮤니티 모듈을 추가할 수
-              있습니다.
-            </p>
-          </div>
-          <!-- Feature 3 -->
-          <div
-            class="bg-white rounded-2xl p-6 shadow-sm card-hover transition-all duration-300"
-          >
-            <div
-              class="w-16 h-16 mb-5 flex items-center justify-center text-primary"
-            >
-              <i class="ri-money-dollar-circle-line ri-3x"></i>
-            </div>
-            <h3 class="text-xl font-semibold mb-3">비용 효율</h3>
-            <p class="text-gray-600">
-              월 35 USD/사용자로 예측 가능한 구독료로 IT 비용을 절감합니다.
-            </p>
-          </div>
-          <!-- Feature 4 -->
-          <div
-            class="bg-white rounded-2xl p-6 shadow-sm card-hover transition-all duration-300"
-          >
-            <div
-              class="w-16 h-16 mb-5 flex items-center justify-center text-secondary"
-            >
-              <i class="ri-rocket-line ri-3x"></i>
-            </div>
-            <h3 class="text-xl font-semibold mb-3">지속 진화</h3>
-            <p class="text-gray-600">
-              Odoo 18 LTS + 분기별 업데이트, v19에는 AI 코드 추천 기능이
-              추가됩니다.
-            </p>
-          </div>
         </div>
-      </div>
     </section>
-    <!-- Partner Value Section -->
-    <section id="value" class="py-20">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-16">
-          LINKUP INFOTECH와 함께하는 이유
-        </h2>
-        <div class="grid md:grid-cols-3 gap-8">
-          <!-- Value 1 -->
-          <div class="text-center">
-            <div
-              class="inline-block mb-4 px-4 py-2 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-bold uppercase tracking-wider"
-            >
-              Professional
-            </div>
-            <div class="bg-white rounded-2xl p-6 shadow-sm">
-              <div class="mb-4 text-4xl font-bold text-primary">25+</div>
-              <h3 class="text-xl font-semibold mb-3">프로젝트 경험</h3>
-              <p class="text-gray-600">
-                다양한 산업 분야의 경험을 바탕으로 업종별 Best Practice를
-                제공합니다.
-              </p>
-            </div>
-          </div>
-          <!-- Value 2 -->
-          <div class="text-center">
-            <div
-              class="inline-block mb-4 px-4 py-2 rounded-full bg-gradient-to-r from-secondary to-primary text-white font-bold uppercase tracking-wider"
-            >
-              Flexible
-            </div>
-            <div class="bg-white rounded-2xl p-6 shadow-sm">
-              <div class="mb-4 text-4xl font-bold text-primary">100%</div>
-              <h3 class="text-xl font-semibold mb-3">맞춤형 솔루션</h3>
-              <p class="text-gray-600">
-                '딱 필요한 만큼' 커스터마이징으로 비즈니스에 완벽하게 적합한
-                시스템을 구축합니다.
-              </p>
-            </div>
-          </div>
-          <!-- Value 3 -->
-          <div class="text-center">
-            <div
-              class="inline-block mb-4 px-4 py-2 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-bold uppercase tracking-wider"
-            >
-              Reliable
-            </div>
-            <div class="bg-white rounded-2xl p-6 shadow-sm">
-              <div class="mb-4 text-4xl font-bold text-primary">24/7</div>
-              <h3 class="text-xl font-semibold mb-3">지원 서비스</h3>
-              <p class="text-gray-600">
-                전담 팀 & SLA로 구축-운영-고도화까지 안정적인 서비스를
-                제공합니다.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Partnership Section -->
+
+    <!-- 특징 & 장점 -->
     <section class="py-20 bg-white">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-4">
-          신뢰할 수 있는 파트너
-        </h2>
-        <p class="text-gray-600 text-center mb-12 max-w-3xl mx-auto">
-          국내 유수 기업들이 JK SOFTLAB과 함께 성장하고 있습니다.
-        </p>
-        <div class="relative overflow-hidden">
-          <div class="partner-logos flex items-center animate-scroll">
-            <div
-              class="flex items-center justify-center min-w-[200px] px-8 grayscale hover:grayscale-0 transition-all"
-            >
-              <img
-                src="https://readdy.ai/api/search-image?query=Minimalist%20modern%20corporate%20logo%20design%20with%20abstract%20geometric%20shapes%20on%20transparent%20background%2C%20professional%20business%20emblem%20in%20blue%20and%20gray%2C%20clean%20vector%20logo%20without%20background&width=160&height=80&seq=logo1&orientation=landscape"
-                alt="Partner Logo"
-                class="h-12 object-contain"
-              />
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">특징 & 장점</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Odoo는 비즈니스 운영에 필요한 모든 기능을 제공합니다.</p>
             </div>
-            <div
-              class="flex items-center justify-center min-w-[200px] px-8 grayscale hover:grayscale-0 transition-all"
-            >
-              <img
-                src="https://readdy.ai/api/search-image?query=Clean%20and%20simple%20business%20logo%20with%20modern%20typography%20and%20minimal%20icon%20on%20transparent%20background%2C%20corporate%20identity%20design%20in%20navy%20blue%2C%20vector%20logo%20without%20background&width=160&height=80&seq=logo2&orientation=landscape"
-                alt="Partner Logo"
-                class="h-12 object-contain"
-              />
-            </div>
-            <div
-              class="flex items-center justify-center min-w-[200px] px-8 grayscale hover:grayscale-0 transition-all"
-            >
-              <img
-                src="https://readdy.ai/api/search-image?query=Contemporary%20tech%20company%20logo%20with%20abstract%20symbol%20on%20transparent%20background%2C%20innovative%20business%20branding%20in%20dark%20blue%2C%20vector%20logo%20without%20background&width=160&height=80&seq=logo3&orientation=landscape"
-                alt="Partner Logo"
-                class="h-12 object-contain"
-              />
-            </div>
-            <div
-              class="flex items-center justify-center min-w-[200px] px-8 grayscale hover:grayscale-0 transition-all"
-            >
-              <img
-                src="https://readdy.ai/api/search-image?query=Professional%20corporate%20logo%20with%20geometric%20elements%20on%20transparent%20background%2C%20modern%20business%20emblem%20in%20blue%20and%20gray%20tones%2C%20vector%20logo%20without%20background&width=160&height=80&seq=logo4&orientation=landscape"
-                alt="Partner Logo"
-                class="h-12 object-contain"
-              />
-            </div>
-            <div
-              class="flex items-center justify-center min-w-[200px] px-8 grayscale hover:grayscale-0 transition-all"
-            >
-              <img
-                src="https://readdy.ai/api/search-image?query=Elegant%20enterprise%20logo%20design%20with%20abstract%20shapes%20on%20transparent%20background%2C%20sophisticated%20business%20branding%20in%20navy%2C%20vector%20logo%20without%20background&width=160&height=80&seq=logo5&orientation=landscape"
-                alt="Partner Logo"
-                class="h-12 object-contain"
-              />
-            </div>
-            <!-- Duplicate for seamless scrolling -->
-            <div
-              class="flex items-center justify-center min-w-[200px] px-8 grayscale hover:grayscale-0 transition-all"
-            >
-              <img
-                src="https://readdy.ai/api/search-image?query=Minimalist%20modern%20corporate%20logo%20design%20with%20abstract%20geometric%20shapes%2C%20professional%20business%20emblem%20in%20blue%20and%20gray&width=160&height=80&seq=logo1&orientation=landscape"
-                alt="Partner Logo"
-                class="h-12 object-contain"
-              />
-            </div>
-            <div
-              class="flex items-center justify-center min-w-[200px] px-8 grayscale hover:grayscale-0 transition-all"
-            >
-              <img
-                src="https://readdy.ai/api/search-image?query=Clean%20and%20simple%20business%20logo%20with%20modern%20typography%20and%20minimal%20icon%20on%20transparent%20background%2C%20corporate%20identity%20design%20in%20navy%20blue%2C%20vector%20logo%20without%20background&width=160&height=80&seq=logo2&orientation=landscape"
-                alt="Partner Logo"
-                class="h-12 object-contain"
-              />
-            </div>
-            <div
-              class="flex items-center justify-center min-w-[200px] px-8 grayscale hover:grayscale-0 transition-all"
-            >
-              <img
-                src="https://readdy.ai/api/search-image?query=Contemporary%20tech%20company%20logo%20with%20abstract%20symbol%20on%20transparent%20background%2C%20innovative%20business%20branding%20in%20dark%20blue%2C%20vector%20logo%20without%20background&width=160&height=80&seq=logo3&orientation=landscape"
-                alt="Partner Logo"
-                class="h-12 object-contain"
-              />
-            </div>
-            <div
-              class="flex items-center justify-center min-w-[200px] px-8 grayscale hover:grayscale-0 transition-all"
-            >
-              <img
-                src="https://readdy.ai/api/search-image?query=Professional%20corporate%20logo%20with%20geometric%20elements%20on%20transparent%20background%2C%20modern%20business%20emblem%20in%20blue%20and%20gray%20tones%2C%20vector%20logo%20without%20background&width=160&height=80&seq=logo4&orientation=landscape"
-                alt="Partner Logo"
-                class="h-12 object-contain"
-              />
-            </div>
-            <div
-              class="flex items-center justify-center min-w-[200px] px-8 grayscale hover:grayscale-0 transition-all"
-            >
-              <img
-                src="https://readdy.ai/api/search-image?query=Elegant%20enterprise%20logo%20design%20with%20abstract%20shapes%20on%20transparent%20background%2C%20sophisticated%20business%20branding%20in%20navy%2C%20vector%20logo%20without%20background&width=160&height=80&seq=logo5&orientation=landscape"
-                alt="Partner Logo"
-                class="h-12 object-contain"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <style>
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-        .animate-scroll {
-          animation: scroll 30s linear infinite;
-          display: flex;
-        }
-        .partner-logos {
-          display: flex;
-          width: fit-content;
-        }
-        .partner-logos > div {
-          flex-shrink: 0;
-        }
-      </style>
-    </section>
-    <!-- Testimonial Section -->
-    <section id="testimonials" class="py-20 bg-[#F6F7F9]">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold text-center mb-4">고객 성공 사례</h2>
-        <p class="text-gray-600 text-center mb-12 max-w-3xl mx-auto">
-          Odoo와 LINKUP INFOTECH가 함께 만든 비즈니스 혁신 스토리를 확인하세요.
-        </p>
-        <div class="relative overflow-hidden">
-          <div
-            class="testimonial-slider flex overflow-x-auto pb-8 -mx-4 px-4 scrollbar-hide"
-          >
-            <!-- Testimonial 1 -->
-            <div
-              class="testimonial-slide min-w-full md:min-w-[500px] md:w-[500px] flex-shrink-0 px-4"
-            >
-              <div class="bg-white rounded-2xl p-8 shadow-sm h-full">
-                <div class="flex items-center mb-6">
-                  <div
-                    class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mr-4"
-                  >
-                    <i class="ri-building-line ri-lg"></i>
-                  </div>
-                  <div>
-                    <h4 class="font-semibold">김민준 CFO</h4>
-                    <p class="text-sm text-gray-500">국내 제조 스타트업</p>
-                  </div>
-                </div>
-                <p class="text-gray-700 italic mb-6">
-                  "재고·주문·회계가 하나로 합쳐지며 주간 마감 40%
-                  단축되었습니다. 이전에는 여러 시스템을 오가며 데이터를
-                  대조해야 했는데, 이제는 모든 정보가 실시간으로 동기화됩니다."
-                </p>
-                <div class="flex">
-                  <div
-                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
-                  >
-                    <i class="ri-star-fill"></i>
-                  </div>
-                  <div
-                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
-                  >
-                    <i class="ri-star-fill"></i>
-                  </div>
-                  <div
-                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
-                  >
-                    <i class="ri-star-fill"></i>
-                  </div>
-                  <div
-                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
-                  >
-                    <i class="ri-star-fill"></i>
-                  </div>
-                  <div
-                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
-                  >
-                    <i class="ri-star-fill"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Testimonial 2 -->
-            <div
-              class="testimonial-slide min-w-full md:min-w-[500px] md:w-[500px] flex-shrink-0 px-4"
-            >
-              <div class="bg-white rounded-2xl p-8 shadow-sm h-full">
-                <div class="flex items-center mb-6">
-                  <div
-                    class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center text-white mr-4"
-                  >
-                    <i class="ri-store-2-line ri-lg"></i>
-                  </div>
-                  <div>
-                    <h4 class="font-semibold">이지현 CEO</h4>
-                    <p class="text-sm text-gray-500">온라인 리테일 기업</p>
-                  </div>
-                </div>
-                <p class="text-gray-700 italic mb-6">
-                  "웹사이트와 재고 관리가 완벽하게 통합되어 주문 처리 시간이 60%
-                  단축되었습니다. 고객 만족도가 크게 향상되었고, 매출도 30%
-                  증가했습니다. LINKUP INFOTECH의 지원 서비스는 언제나 신속하고
-                  정확합니다."
-                </p>
-                <div class="flex">
-                  <div
-                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
-                  >
-                    <i class="ri-star-fill"></i>
-                  </div>
-                  <div
-                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
-                  >
-                    <i class="ri-star-fill"></i>
-                  </div>
-                  <div
-                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
-                  >
-                    <i class="ri-star-fill"></i>
-                  </div>
-                  <div
-                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
-                  >
-                    <i class="ri-star-fill"></i>
-                  </div>
-                  <div
-                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
-                  >
-                    <i class="ri-star-fill"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Testimonial 3 -->
-            <div
-              class="testimonial-slide min-w-full md:min-w-[500px] md:w-[500px] flex-shrink-0 px-4"
-            >
-              <div class="bg-white rounded-2xl p-8 shadow-sm h-full">
-                <div class="flex items-center mb-6">
-                  <div
-                    class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mr-4"
-                  >
-                    <i class="ri-service-line ri-lg"></i>
-                  </div>
-                  <div>
-                    <h4 class="font-semibold">박서연 COO</h4>
-                    <p class="text-sm text-gray-500">서비스 기업</p>
-                  </div>
-                </div>
-                <p class="text-gray-700 italic mb-6">
-                  "CRM과 프로젝트 관리 모듈을 도입한 후 영업팀과 운영팀 간의
-                  협업이 원활해졌습니다. 리드 전환율이 25% 상승했고, 프로젝트
-                  완료 시간도 평균 2주 단축되었습니다."
-                </p>
-                <div class="flex">
-                  <div
-                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
-                  >
-                    <i class="ri-star-fill"></i>
-                  </div>
-                  <div
-                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
-                  >
-                    <i class="ri-star-fill"></i>
-                  </div>
-                  <div
-                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
-                  >
-                    <i class="ri-star-fill"></i>
-                  </div>
-                  <div
-                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
-                  >
-                    <i class="ri-star-fill"></i>
-                  </div>
-                  <div
-                    class="w-5 h-5 flex items-center justify-center text-yellow-400"
-                  >
-                    <i class="ri-star-half-fill"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="flex justify-center mt-6 space-x-2">
-            <button class="w-3 h-3 rounded-full bg-primary"></button>
-            <button class="w-3 h-3 rounded-full bg-gray-300"></button>
-            <button class="w-3 h-3 rounded-full bg-gray-300"></button>
-          </div>
-          <div class="text-center mt-8">
-            <a
-              href="#"
-              class="text-primary font-medium inline-flex items-center"
-            >
-              더 많은 사례 보기
-              <div class="w-5 h-5 ml-1 flex items-center justify-center">
-                <i class="ri-arrow-right-line"></i>
-              </div>
-            </a>
-        </div>
-        </div>
-        </div>
-        </section>
-        <!-- Process Section -->
-        <section id="process" class="py-20">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold text-center mb-4">구현 프로세스</h2>
-                <p class="text-gray-600 text-center mb-16 max-w-3xl mx-auto">
-                    LINKUP INFOTECH는 체계적인 프로세스로 성공적인 Odoo 구현을 보장합니다.
-                </p>
-                <div class="hidden md:flex justify-between relative mb-12">
-                    <!-- Step 1 -->
-                    <div class="relative z-10 flex flex-col items-center w-1/4 px-4">
-                        <div class="w-20 h-20 rounded-full bg-primary text-white flex items-center justify-center mb-4 shadow-lg">
-                            <i class="ri-search-line ri-2x"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2 text-center">Diagnostic</h3>
-                        <p class="text-gray-600 text-center text-sm mb-2">
-                            현행 업무·IT 환경 360° 분석
-                        </p>
-                        <p class="text-gray-500 text-center text-xs leading-relaxed">
-                            귀사의 업무 프로세스와 시스템을 철저히 분석하여 최적화 포인트를 도출합니다.
-                        </p>
-                    </div>
-                    <!-- Step 2 -->
-                    <div class="relative z-10 flex flex-col items-center w-1/4 px-4">
-                        <div class="w-20 h-20 rounded-full bg-white border-2 border-primary text-primary flex items-center justify-center mb-4 shadow-lg">
-                            <i class="ri-layout-2-line ri-2x"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2 text-center">Design</h3>
-                        <p class="text-gray-600 text-center text-sm mb-2">
-                            표준 모듈 + 필요 기능 설계
-                        </p>
-                        <p class="text-gray-500 text-center text-xs leading-relaxed">
-                            업계 표준 모듈과 귀사만의 차별화 요소를 결합한 맞춤형 솔루션을 설계합니다.
-                        </p>
-                    </div>
-                    <!-- Step 3 -->
-                    <div class="relative z-10 flex flex-col items-center w-1/4 px-4">
-                        <div class="w-20 h-20 rounded-full bg-white border-2 border-primary text-primary flex items-center justify-center mb-4 shadow-lg">
-                            <i class="ri-code-box-line ri-2x"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2 text-center">Delivery</h3>
-                        <p class="text-gray-600 text-center text-sm mb-2">
-                            단계별 데이터 이관 & 사용자 교육
-                        </p>
-                        <p class="text-gray-500 text-center text-xs leading-relaxed">
-                            안정적인 데이터 마이그레이션과 팀원들의 신속한 적응을 위한 체계적 교육을 제공합니다.
-                        </p>
-                    </div>
-                    <!-- Step 4 -->
-                    <div class="relative z-10 flex flex-col items-center w-1/4 px-4">
-                        <div class="w-20 h-20 rounded-full bg-white border-2 border-primary text-primary flex items-center justify-center mb-4 shadow-lg">
-                            <i class="ri-rocket-line ri-2x"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold mb-2 text-center">Drive</h3>
-                        <p class="text-gray-600 text-center text-sm mb-2">
-                            고도화 로드맵 & 운영 지원
-                        </p>
-                        <p class="text-gray-500 text-center text-xs leading-relaxed">
-                            지속적인 비즈니스 성장에 맞춘 시스템 고도화 계획과 안정적 운영 지원을 보장합니다.
-                        </p>
-                    </div>
-                </div>
-                <!-- Mobile Accordion -->
-                <div class="md:hidden space-y-4">
-                    <div class="bg-white rounded-xl p-4 shadow-sm">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center mr-4">
-                                <i class="ri-search-line"></i>
-                            </div>
-                            <h3 class="text-lg font-semibold">Diagnostic</h3>
-                            <div class="ml-auto w-8 h-8 flex items-center justify-center">
-                                <i class="ri-arrow-down-s-line"></i>
-                            </div>
-                        </div>
-                        <div class="mt-4 pl-16">
-                            <p class="text-gray-600">현행 업무·IT 환경 360° 분석</p>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-xl p-4 shadow-sm">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 text-primary flex items-center justify-center mr-4">
-                                <i class="ri-layout-2-line"></i>
-                            </div>
-                            <h3 class="text-lg font-semibold">Design</h3>
-                            <div class="ml-auto w-8 h-8 flex items-center justify-center">
-                                <i class="ri-arrow-down-s-line"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-xl p-4 shadow-sm">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 text-primary flex items-center justify-center mr-4">
-                                <i class="ri-code-box-line"></i>
-                            </div>
-                            <h3 class="text-lg font-semibold">Develop</h3>
-                            <div class="ml-auto w-8 h-8 flex items-center justify-center">
-                                <i class="ri-arrow-down-s-line"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-xl p-4 shadow-sm">
-                        <div class="flex items-center">
-                            <div class="w-12 h-12 rounded-full bg-gray-200 text-primary flex items-center justify-center mr-4">
-                                <i class="ri-rocket-line"></i>
-                            </div>
-                            <h3 class="text-lg font-semibold">Drive</h3>
-                            <div class="ml-auto w-8 h-8 flex items-center justify-center">
-                                <i class="ri-arrow-down-s-line"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Conversion Section -->
-        <section class="py-20 bg-[#F6F7F9]">
-            <div class="container mx-auto px-4">
-                <div class="bg-white rounded-2xl p-8 md:p-12 shadow-sm max-w-5xl mx-auto">
-                    <div class="grid md:grid-cols-2 gap-8">
-                        <div>
-                            <h3 class="text-3xl font-bold mb-4">
-                                LINKUP INFOTECH가 귀사의 언어로 비즈니스를 설계합니다
-                            </h3>
-                            <p class="text-gray-600 mb-6">
-                                무료 데모 & ROI 시뮬레이션을 신청하세요. 귀사의 비즈니스에 맞는 최적의 Odoo 솔루션을 제안해 드립니다.
-                            </p>
-                            <div class="flex flex-wrap items-center gap-4 mt-8">
-                                <div class="flex items-center grayscale opacity-70">
-                                    <div class="w-6 h-6 flex items-center justify-center mr-2">
-                                        <i class="ri-award-fill ri-lg"></i>
-                                    </div>
-                                    <span class="text-sm">Odoo 골드 파트너</span>
-                                </div>
-                                <div class="flex items-center grayscale opacity-70">
-                                    <div class="w-6 h-6 flex items-center justify-center mr-2">
-                                        <i class="ri-verified-badge-fill ri-lg"></i>
-                                    </div>
-                                    <span class="text-sm">인증된 구현 전문가</span>
-                                </div>
-                                <div class="flex items-center grayscale opacity-70">
-                                    <div class="w-6 h-6 flex items-center justify-center mr-2">
-                                        <i class="ri-customer-service-2-fill ri-lg"></i>
-                                    </div>
-                                    <span class="text-sm">24/7 기술 지원</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <form id="contactForm" class="space-y-4">
-                                <div>
-                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">이름</label
-                  >
-                  <input
-                    type="text"
-                    id="name"
-                    class="w-full px-4 py-2 border border-gray-300 rounded focus:border-primary"
-                    placeholder="홍길동"
-                  />
-                </div>
-                <div>
-                  <label
-                    for="email"
-                    class="block text-sm font-medium text-gray-700 mb-1"
-                    >이메일</label
-                  >
-                  <input
-                    type="email"
-                    id="email"
-                    class="w-full px-4 py-2 border border-gray-300 rounded focus:border-primary"
-                    placeholder="example@company.com"
-                  />
-                </div>
-                <div>
-                  <label
-                    for="company"
-                    class="block text-sm font-medium text-gray-700 mb-1"
-                    >회사명</label
-                  >
-                  <input
-                    type="text"
-                    id="company"
-                    class="w-full px-4 py-2 border border-gray-300 rounded focus:border-primary"
-                    placeholder="주식회사 예시"
-                  />
-                </div>
-                <div>
-                  <label
-                    for="phone"
-                    class="block text-sm font-medium text-gray-700 mb-1"
-                    >연락처</label
-                  >
-                  <input
-                    type="tel"
-                    id="phone"
-                    class="w-full px-4 py-2 border border-gray-300 rounded focus:border-primary"
-                    placeholder="010-1234-5678"
-                  />
-                </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10 max-w-4xl mx-auto">
+                <!-- 특징 1 -->
                 <div class="flex items-start">
-                  <input
-                    type="checkbox"
-                    id="consent"
-                    class="custom-checkbox mt-1"
-                  />
-                  <label for="consent" class="ml-2 text-sm text-gray-600"
-                    >개인정보 수집 및 이용에 동의합니다.</label
-                  >
+                    <div class="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-full mr-4 flex-shrink-0">
+                        <i class="ri-layout-grid-line text-primary"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">모듈형 구조</h3>
+                        <p class="text-gray-600">필요한 기능만 골라 도입하여 비용 효율성을 극대화하세요.</p>
+                    </div>
                 </div>
-                <button
-                  type="submit"
-                  class="w-full bg-primary text-white py-3 !rounded-button hover:bg-opacity-90 transition-colors whitespace-nowrap"
-                >
-                  지금 상담 예약
-                </button>
-              </form>
+                
+                <!-- 특징 2 -->
+                <div class="flex items-start">
+                    <div class="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-full mr-4 flex-shrink-0">
+                        <i class="ri-link-m text-primary"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">완전 통합</h3>
+                        <p class="text-gray-600">앱 간 데이터가 자동으로 연결되어 중복 작업을 줄입니다.</p>
+                    </div>
+                </div>
+                
+                <!-- 특징 3 -->
+                <div class="flex items-start">
+                    <div class="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-full mr-4 flex-shrink-0">
+                        <i class="ri-user-smile-line text-primary"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">쉽고 직관적인 UI</h3>
+                        <p class="text-gray-600">비전문가도 30분 내에 사용 가능한 직관적인 인터페이스를 제공합니다.</p>
+                    </div>
+                </div>
+                
+                <!-- 특징 4 -->
+                <div class="flex items-start">
+                    <div class="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-full mr-4 flex-shrink-0">
+                        <i class="ri-expand-up-down-line text-primary"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">확장성</h3>
+                        <p class="text-gray-600">스타트업부터 대기업까지 모든 규모의 비즈니스에 적합합니다.</p>
+                    </div>
+                </div>
+                
+                <!-- 특징 5 -->
+                <div class="flex items-start">
+                    <div class="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-full mr-4 flex-shrink-0">
+                        <i class="ri-open-source-line text-primary"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">오픈 소스</h3>
+                        <p class="text-gray-600">라이선스 비용 Zero, 유지보수의 자유도가 높습니다.</p>
+                    </div>
+                </div>
+                
+                <!-- 특징 6 -->
+                <div class="flex items-start">
+                    <div class="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-full mr-4 flex-shrink-0">
+                        <i class="ri-secure-payment-line text-primary"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">비용 효율성</h3>
+                        <p class="text-gray-600">필요한 기능만 사용하여 비용을 최적화할 수 있습니다.</p>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </section>
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-      <div class="container mx-auto px-4">
-        <div class="grid md:grid-cols-4 gap-8 mb-8">
-          <div>
-            <a
-              href="#"
-              class="text-white font-bold text-2xl tracking-wider mb-4 inline-block"
-              >JK SOFTLAB</a
-            >
-            <p class="text-gray-400 mb-4">
-              한국 1위 Odoo 파트너사로서 비즈니스 혁신을 위한 최고의 솔루션을
-              제공합니다.
-            </p>
-            <div class="flex space-x-4">
-              <a
-                href="#"
-                class="text-gray-400 hover:text-white transition-colors"
-              >
-                <div class="w-8 h-8 flex items-center justify-center">
-                  <i class="ri-facebook-fill"></i>
-                </div>
-              </a>
-              <a
-                href="#"
-                class="text-gray-400 hover:text-white transition-colors"
-              >
-                <div class="w-8 h-8 flex items-center justify-center">
-                  <i class="ri-twitter-x-fill"></i>
-                </div>
-              </a>
-              <a
-                href="#"
-                class="text-gray-400 hover:text-white transition-colors"
-              >
-                <div class="w-8 h-8 flex items-center justify-center">
-                  <i class="ri-linkedin-fill"></i>
-                </div>
-              </a>
-              <a
-                href="#"
-                class="text-gray-400 hover:text-white transition-colors"
-              >
-                <div class="w-8 h-8 flex items-center justify-center">
-                  <i class="ri-instagram-fill"></i>
-                </div>
-              </a>
+
+    <!-- 파트너/고객사 로고 -->
+    <section class="py-16 bg-gray-50 overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold mb-4">신뢰할 수 있는 파트너</h2>
+                <p class="text-gray-600">전 세계 수많은 기업들이 Odoo를 선택했습니다</p>
             </div>
-          </div>
-          <div>
-            <h4 class="text-lg font-semibold mb-4">솔루션</h4>
-            <ul class="space-y-2">
-              <li>
-                <a
-                  href="#"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >회계 & 재무</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >CRM & 영업</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >제조 & 생산</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >전자상거래</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >인사 & 급여</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="text-lg font-semibold mb-4">회사 정보</h4>
-            <ul class="space-y-2">
-              <li>
-                <a
-                  href="#"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >회사 소개</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >고객 사례</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >블로그</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >채용 정보</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-gray-400 hover:text-white transition-colors"
-                  >파트너십</a
-                >
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="text-lg font-semibold mb-4">연락처</h4>
-            <ul class="space-y-2">
-              <li class="flex items-start">
-                <div
-                  class="w-5 h-5 flex items-center justify-center text-gray-400 mr-2 mt-1"
-                >
-                  <i class="ri-map-pin-line"></i>
+            
+            <div class="relative">
+                <div class="flex partner-logos space-x-16 opacity-70">
+                    <div class="flex items-center justify-center min-w-[150px]">
+                        <div class="text-gray-500 font-medium flex items-center">
+                            <i class="ri-building-line mr-2 text-xl"></i>
+                            <span>Paracel</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center min-w-[150px]">
+                        <div class="text-gray-500 font-medium flex items-center">
+                            <i class="ri-ship-line mr-2 text-xl"></i>
+                            <span>Port Cities</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center min-w-[150px]">
+                        <div class="text-gray-500 font-medium flex items-center">
+                            <i class="ri-code-box-line mr-2 text-xl"></i>
+                            <span>Wedoo</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center min-w-[150px]">
+                        <div class="text-gray-500 font-medium flex items-center">
+                            <i class="ri-cloud-line mr-2 text-xl"></i>
+                            <span>CloudTech</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center min-w-[150px]">
+                        <div class="text-gray-500 font-medium flex items-center">
+                            <i class="ri-global-line mr-2 text-xl"></i>
+                            <span>GlobalSys</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center min-w-[150px]">
+                        <div class="text-gray-500 font-medium flex items-center">
+                            <i class="ri-rocket-line mr-2 text-xl"></i>
+                            <span>LaunchPad</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 복제된 로고들 (무한 스크롤 효과를 위해) -->
+                    <div class="flex items-center justify-center min-w-[150px]">
+                        <div class="text-gray-500 font-medium flex items-center">
+                            <i class="ri-building-line mr-2 text-xl"></i>
+                            <span>Paracel</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center min-w-[150px]">
+                        <div class="text-gray-500 font-medium flex items-center">
+                            <i class="ri-ship-line mr-2 text-xl"></i>
+                            <span>Port Cities</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center min-w-[150px]">
+                        <div class="text-gray-500 font-medium flex items-center">
+                            <i class="ri-code-box-line mr-2 text-xl"></i>
+                            <span>Wedoo</span>
+                        </div>
+                    </div>
                 </div>
-                <span class="text-gray-400"
-                  >서울특별시 강남구 테헤란로 123, 4층</span
-                >
-              </li>
-              <li class="flex items-center">
-                <div
-                  class="w-5 h-5 flex items-center justify-center text-gray-400 mr-2"
-                >
-                  <i class="ri-phone-line"></i>
-                </div>
-                <span class="text-gray-400">02-123-4567</span>
-              </li>
-              <li class="flex items-center">
-                <div
-                  class="w-5 h-5 flex items-center justify-center text-gray-400 mr-2"
-                >
-                  <i class="ri-mail-line"></i>
-                </div>
-                <span class="text-gray-400">info@jksoftlab.com</span>
-              </li>
-            </ul>
-          </div>
+            </div>
         </div>
-        <div
-          class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center"
-        >
-          <p class="text-gray-500 text-sm mb-4 md:mb-0">
-            © 2025 LINKUP INFOTECH. All rights reserved.
-          </p>
-          <div class="flex space-x-6">
-            <a
-              href="#"
-              class="text-gray-500 hover:text-white text-sm transition-colors"
-              >개인정보처리방침</a
-            >
-            <a
-              href="#"
-              class="text-gray-500 hover:text-white text-sm transition-colors"
-              >이용약관</a
-            >
-            <a
-              href="#"
-              class="text-gray-500 hover:text-white text-sm transition-colors"
-              >쿠키 정책</a
-            >
-          </div>
+    </section>
+
+    <!-- 성공사례 섹션 -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">고객 성공 사례</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">실제 고객들의 Odoo 도입 후 비즈니스 성과를 확인하세요</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                <!-- 성공사례 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="relative h-56 bg-gray-200">
+                        <img src="https://readdy.ai/api/search-image?query=modern%20office%20environment%20with%20people%20working%20on%20computers%2C%20business%20meeting%2C%20professional%20setting%2C%20high%20quality%20corporate%20image&width=600&height=400&seq=54321&orientation=landscape" alt="성공사례 1" class="w-full h-full object-cover object-top">
+                        <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                            <button class="w-16 h-16 bg-white bg-opacity-80 rounded-full flex items-center justify-center">
+                                <i class="ri-play-fill text-primary text-3xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">대한물류 주식회사</h3>
+                        <p class="text-gray-600 mb-4">"Odoo 도입 후 물류 관리 효율이 30% 향상되었으며, 재고 관리 오류가 90% 감소했습니다."</p>
+                        <div class="flex items-center">
+                            <img src="https://readdy.ai/api/search-image?query=professional%20asian%20businessman%20portrait%2C%20formal%20attire%2C%20corporate%20headshot%2C%20neutral%20background&width=100&height=100&seq=98765&orientation=squarish" alt="김성민 이사" class="w-10 h-10 rounded-full object-cover mr-3">
+                            <div>
+                                <p class="font-medium">김성민 이사</p>
+                                <p class="text-sm text-gray-500">물류 운영 총괄</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 성공사례 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="relative h-56 bg-gray-200">
+                        <img src="https://readdy.ai/api/search-image?query=tech%20startup%20office%20with%20diverse%20team%20working%20together%2C%20modern%20workspace%2C%20creative%20environment%2C%20high%20quality%20corporate%20image&width=600&height=400&seq=67890&orientation=landscape" alt="성공사례 2" class="w-full h-full object-cover object-top">
+                        <div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
+                            <button class="w-16 h-16 bg-white bg-opacity-80 rounded-full flex items-center justify-center">
+                                <i class="ri-play-fill text-primary text-3xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">테크노바 솔루션즈</h3>
+                        <p class="text-gray-600 mb-4">"Odoo의 프로젝트 관리 모듈 덕분에 개발 주기가 25% 단축되고 팀 협업이 크게 향상되었습니다."</p>
+                        <div class="flex items-center">
+                            <img src="https://readdy.ai/api/search-image?query=professional%20asian%20businesswoman%20portrait%2C%20formal%20attire%2C%20corporate%20headshot%2C%20neutral%20background&width=100&height=100&seq=43210&orientation=squarish" alt="박지연 대표" class="w-10 h-10 rounded-full object-cover mr-3">
+                            <div>
+                                <p class="font-medium">박지연 대표</p>
+                                <p class="text-sm text-gray-500">CEO</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
+
+    <!-- 통계 섹션 -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Odoo 글로벌 현황</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">전 세계적으로 인정받는 비즈니스 솔루션</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                    <div class="text-primary text-4xl font-bold mb-2">7백만+</div>
+                    <p class="text-gray-600">전 세계 사용자</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                    <div class="text-primary text-4xl font-bold mb-2">40,000+</div>
+                    <p class="text-gray-600">앱스토어 모듈</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                    <div class="text-primary text-4xl font-bold mb-2">120+</div>
+                    <p class="text-gray-600">지원 국가</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA 섹션 -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="bg-blue-50 p-8 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4">무료 데모 신청</h3>
+                    <p class="text-gray-600 mb-6">Odoo의 모든 기능을 직접 체험해보세요. 전문 컨설턴트가 귀사에 맞는 솔루션을 안내해드립니다.</p>
+                    <button class="bg-primary hover:bg-blue-600 text-white px-6 py-3 !rounded-button whitespace-nowrap">데모 신청하기</button>
+                </div>
+                
+                <div class="bg-gray-100 p-8 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-4">파트너 문의</h3>
+                    <p class="text-gray-600 mb-6">Odoo 파트너로 등록하고 비즈니스를 확장하세요. 다양한 협력 기회가 여러분을 기다립니다.</p>
+                    <button class="bg-gray-700 hover:bg-gray-800 text-white px-6 py-3 !rounded-button whitespace-nowrap">파트너 문의하기</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 블로그 섹션 -->
+    <section class="py-20 bg-yellow-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">최신 블로그</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Odoo 활용 팁과 비즈니스 인사이트를 확인하세요</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 블로그 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://readdy.ai/api/search-image?query=business%20analytics%20dashboard%20on%20computer%20screen%2C%20data%20visualization%2C%20professional%20business%20setting&width=400&height=250&seq=11223&orientation=landscape" alt="블로그 1" class="w-full h-48 object-cover object-top">
+                    <div class="p-6">
+                        <div class="text-sm text-gray-500 mb-2">2025년 4월 20일</div>
+                        <h3 class="text-xl font-bold mb-2">Odoo 대시보드 활용 팁 10가지</h3>
+                        <p class="text-gray-600 mb-4">효율적인 비즈니스 관리를 위한 Odoo 대시보드 커스터마이징 방법을 알아보세요.</p>
+                        <a href="#" class="text-primary font-medium hover:underline">자세히 보기</a>
+                    </div>
+                </div>
+                
+                <!-- 블로그 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://readdy.ai/api/search-image?query=inventory%20management%20system%20in%20warehouse%2C%20logistics%2C%20supply%20chain%20management&width=400&height=250&seq=33445&orientation=landscape" alt="블로그 2" class="w-full h-48 object-cover object-top">
+                    <div class="p-6">
+                        <div class="text-sm text-gray-500 mb-2">2025년 4월 15일</div>
+                        <h3 class="text-xl font-bold mb-2">재고 관리 자동화로 비용 절감하기</h3>
+                        <p class="text-gray-600 mb-4">Odoo 재고 관리 모듈을 활용한 자동화 전략과 비용 절감 사례를 소개합니다.</p>
+                        <a href="#" class="text-primary font-medium hover:underline">자세히 보기</a>
+                    </div>
+                </div>
+                
+                <!-- 블로그 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <img src="https://readdy.ai/api/search-image?query=business%20team%20meeting%2C%20collaboration%2C%20project%20planning%2C%20professional%20office%20environment&width=400&height=250&seq=55667&orientation=landscape" alt="블로그 3" class="w-full h-48 object-cover object-top">
+                    <div class="p-6">
+                        <div class="text-sm text-gray-500 mb-2">2025년 4월 10일</div>
+                        <h3 class="text-xl font-bold mb-2">Odoo로 원격 팀 관리하기</h3>
+                        <p class="text-gray-600 mb-4">하이브리드 근무 환경에서 Odoo를 활용한 효과적인 팀 관리 방법을 알아보세요.</p>
+                        <a href="#" class="text-primary font-medium hover:underline">자세히 보기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- 회사 정보 -->
+                <div>
+                    <h3 class="text-xl font-['Pacifico'] text-white mb-4">logo</h3>
+                    <p class="text-gray-400 mb-4">모든 비즈니스를 위한 통합 솔루션</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="ri-twitter-fill"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="ri-linkedin-fill"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="ri-youtube-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 제품 -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">제품</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">CRM</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">회계</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">재고</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">제조</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">인사</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">프로젝트</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 리소스 -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">리소스</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">문서</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">블로그</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">포럼</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">교육</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">이벤트</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">성공 사례</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 회사 -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">회사</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">소개</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">파트너</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">채용</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">연락처</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">뉴스룸</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">법적 고지</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 Odoo. All rights reserved.</p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-500 hover:text-white text-sm">개인정보 처리방침</a>
+                        <a href="#" class="text-gray-500 hover:text-white text-sm">이용약관</a>
+                        <a href="#" class="text-gray-500 hover:text-white text-sm">쿠키 정책</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </footer>
+
+    <div class="fixed bottom-6 right-6 z-50">
+        <button class="bg-primary hover:bg-blue-600 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center">
+            <i class="ri-message-3-line text-xl"></i>
+        </button>
+    </div>
+
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Header shadow on scroll
-        const header = document.querySelector("header");
-        window.addEventListener("scroll", function () {
-          if (window.scrollY > 10) {
-            header.classList.add("header-shadow");
-          } else {
-            header.classList.remove("header-shadow");
-          }
+        document.addEventListener('DOMContentLoaded', function() {
+            // 스크롤 시 헤더 스타일 변경
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('shadow-md');
+                } else {
+                    header.classList.remove('shadow-md');
+                }
+            });
         });
-      });
-      document.addEventListener("DOMContentLoaded", function () {
-        // Form submission
-        const contactForm = document.getElementById("contactForm");
-        if (contactForm) {
-          contactForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            // Create toast notification
-            const toast = document.createElement("div");
-            toast.className =
-              "fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transform transition-all duration-500 translate-y-20 opacity-0";
-            toast.textContent =
-              "상담 신청이 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.";
-            document.body.appendChild(toast);
-            // Show toast
-            setTimeout(() => {
-              toast.classList.remove("translate-y-20", "opacity-0");
-            }, 100);
-            // Hide toast after 3 seconds
-            setTimeout(() => {
-              toast.classList.add("translate-y-20", "opacity-0");
-              setTimeout(() => {
-                document.body.removeChild(toast);
-              }, 500);
-            }, 3000);
-            // Reset form
-            contactForm.reset();
-          });
-        }
-      });
-      document.addEventListener("DOMContentLoaded", function () {
-        // Testimonial slider
-        const slider = document.querySelector(".testimonial-slider");
-        const slides = document.querySelectorAll(".testimonial-slide");
-        const dots = document.querySelectorAll(".mt-6 .rounded-full");
-        if (!slider || !slides.length || !dots.length) return;
-        let currentSlide = 0;
-        const slideCount = slides.length;
-        function goToSlide(index) {
-          if (index < 0) index = slideCount - 1;
-          if (index >= slideCount) index = 0;
-          currentSlide = index;
-          const slideWidth = slides[0].offsetWidth;
-          slider.scrollTo({
-            left: index * slideWidth,
-            behavior: "smooth",
-          });
-          // Update dots
-          dots.forEach((dot, i) => {
-            if (i === index) {
-              dot.classList.remove("bg-gray-300");
-              dot.classList.add("bg-primary");
-            } else {
-              dot.classList.remove("bg-primary");
-              dot.classList.add("bg-gray-300");
-            }
-          });
-        }
-        // Auto slide
-        let slideInterval = setInterval(() => {
-          goToSlide(currentSlide + 1);
-        }, 5000);
-        // Click on dots
-        dots.forEach((dot, i) => {
-          dot.addEventListener("click", () => {
-            clearInterval(slideInterval);
-            goToSlide(i);
-            slideInterval = setInterval(() => {
-              goToSlide(currentSlide + 1);
-            }, 5000);
-          });
-        });
-        // Mobile accordion
-        const accordionHeaders = document.querySelectorAll(
-          ".md\\:hidden .flex.items-center"
-        );
-        accordionHeaders.forEach((header) => {
-          header.addEventListener("click", () => {
-            const content = header.nextElementSibling;
-            const icon = header.querySelector(".ri-arrow-down-s-line");
-            if (content) {
-              if (content.style.display === "none" || !content.style.display) {
-                content.style.display = "block";
-                icon.classList.remove("ri-arrow-down-s-line");
-                icon.classList.add("ri-arrow-up-s-line");
-              } else {
-                content.style.display = "none";
-                icon.classList.remove("ri-arrow-up-s-line");
-                icon.classList.add("ri-arrow-down-s-line");
-              }
-            }
-          });
-        });
-      });
     </script>
-  </body>
+</body>
 </html>
