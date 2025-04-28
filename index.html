@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com/3.4.16"></script>
-<script>tailwind.config={theme:{extend:{colors:{primary:'#3b82f6',secondary:'#6366f1'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#0072BC',secondary:'#6D7784'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
 <style>
 :where([class^="ri-"])::before { content: "\f3c2"; }
 body {
@@ -19,6 +19,32 @@ font-family: 'Inter', 'Pretendard', 'Noto Sans KR', sans-serif;
 background-image: url('https://readdy.ai/api/search-image?query=modern%20minimalist%20corporate%20office%20with%20elegant%20glass%20walls%20and%20floating%20data%20visualization%20displays%2C%20sophisticated%20tech%20environment%20with%20soft%20ambient%20lighting%2C%20premium%20executive%20workspace%20with%20panoramic%20city%20view%2C%20ultra%20high%20end%20professional%20setting%2C%20cinematic%20lighting%2C%20architectural%20photography%2C%208k%20quality&width=1920&height=800&seq=12346&orientation=landscape');
 background-size: cover;
 background-position: center;
+position: relative;
+overflow: hidden;
+}
+.particle {
+position: absolute;
+width: 4px;
+height: 4px;
+background: rgba(255, 255, 255, 0.15);
+border-radius: 50%;
+pointer-events: none;
+}
+@keyframes float-up {
+0% {
+transform: translateY(100%) translateX(0);
+opacity: 0;
+}
+20% {
+opacity: 0.5;
+}
+80% {
+opacity: 0.5;
+}
+100% {
+transform: translateY(-100%) translateX(100px);
+opacity: 0;
+}
 }
 .gradient-overlay {
 background: linear-gradient(45deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
@@ -74,7 +100,7 @@ outline: none;
 <!-- 헤더 -->
 <header class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
 <div class="container mx-auto px-6 py-4 flex items-center justify-between">
-<a href="#" class="text-2xl font-['Pacifico'] text-primary">logo</a>
+<a href="#" class="h-8"><img src="https://static.readdy.ai/image/4e1f287963bede77105917e828dee681/7be8abb80dd06d82eda71f8929d253a6.png" alt="JK Softlab" class="h-full"></a>
 <nav class="hidden md:flex items-center space-x-8">
 <a href="#" class="text-gray-800 hover:text-primary font-medium">제품소개</a>
 <a href="#" class="text-gray-800 hover:text-primary font-medium">가격</a>
@@ -94,78 +120,165 @@ outline: none;
 </div>
 </header>
 <!-- 히어로 섹션 -->
-<section class="hero-section w-full h-screen flex items-center justify-center text-white relative pt-16">
-<div class="absolute inset-0 gradient-overlay"></div>
-<div class="container mx-auto px-6 text-center relative z-10">
-<h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">Odoo – 모든 비즈니스를<br>하나의 플랫폼에서</h1>
-<p class="text-xl md:text-2xl mb-12 max-w-3xl mx-auto font-light tracking-wide">CRM부터 회계·재고·제조까지, 필요한 기능만 모듈로 선택하세요.</p>
-<div class="flex items-center justify-center gap-6">
-<button class="bg-primary hover:bg-blue-600 text-white text-lg px-10 py-4 !rounded-button shadow-xl whitespace-nowrap transition-all duration-300 hover:scale-105">무료 데모 신청</button>
-<button class="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white text-lg px-10 py-4 !rounded-button shadow-xl whitespace-nowrap transition-all duration-300 border border-white/30">자세히 알아보기</button>
+<section class="hero-section w-full h-screen relative pt-16 overflow-hidden">
+<div class="slider-container w-full h-full relative">
+<!-- Slide 1 -->
+<div class="slide absolute inset-0 opacity-0 transition-opacity duration-500" data-slide="1">
+<div class="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent"></div>
+<img src="https://readdy.ai/api/search-image?query=modern%20cityscape%20with%20futuristic%20technology%20overlay%2C%20digital%20transformation%20concept%2C%20corporate%20buildings%20with%20glowing%20network%20connections%2C%20professional%20architectural%20photography%20with%20dramatic%20lighting%20and%20particle%20effects&width=1920&height=1080&seq=12348&orientation=landscape" alt="Digital Transformation" class="w-full h-full object-cover">
+<div class="absolute inset-0 flex items-center">
+<div class="container mx-auto px-6">
+<div class="max-w-3xl">
+<h2 class="text-2xl font-semibold text-white mb-4">JK소프트랩</h2>
+<h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-white leading-tight">비즈니스 혁신의 파트너</h1>
+<p class="text-xl text-white/90 mb-12">IT 컨설팅 및 솔루션 전문기업<br>고객의 디지털 전환을 위한 최적의 파트너</p>
+<button class="bg-primary hover:bg-blue-600 text-white text-lg px-10 py-4 !rounded-button shadow-xl whitespace-nowrap transition-all duration-300">자세히 보기</button>
 </div>
 </div>
-<div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator w-6 h-10 border-2 border-white rounded-full flex justify-center pt-2">
-<div class="w-1 h-1 bg-white rounded-full"></div>
 </div>
+</div>
+<!-- Slide 2 -->
+<div class="slide absolute inset-0 opacity-0 transition-opacity duration-500" data-slide="2">
+<div class="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent"></div>
+<img src="https://readdy.ai/api/search-image?query=advanced%20manufacturing%20facility%20with%20robotic%20automation%20and%20AI%20visualization%2C%20industrial%204.0%20concept%2C%20high-tech%20factory%20interior%20with%20blue%20light%20accents%20and%20digital%20displays&width=1920&height=1080&seq=12349&orientation=landscape" alt="Smart Factory" class="w-full h-full object-cover">
+<div class="absolute inset-0 flex items-center">
+<div class="container mx-auto px-6">
+<div class="max-w-3xl">
+<h2 class="text-2xl font-semibold text-white mb-4">스마트팩토리</h2>
+<h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-white leading-tight">Smart Factory Solution</h1>
+<p class="text-xl text-white/90 mb-12">제조 현장의 디지털 혁신을 통한 생산성 향상<br>스마트팩토리 구축의 시작, BIZENTRO와 함께하세요</p>
+<button class="bg-primary hover:bg-blue-600 text-white text-lg px-10 py-4 !rounded-button shadow-xl whitespace-nowrap transition-all duration-300">자세히 보기</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Slide 3 -->
+<div class="slide absolute inset-0 opacity-0 transition-opacity duration-500" data-slide="3">
+<div class="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent"></div>
+<img src="https://readdy.ai/api/search-image?query=data%20analytics%20dashboard%20with%203D%20visualization%2C%20business%20intelligence%20concept%2C%20modern%20office%20environment%20with%20holographic%20displays%20and%20professional%20lighting&width=1920&height=1080&seq=12350&orientation=landscape" alt="Business Intelligence" class="w-full h-full object-cover">
+<div class="absolute inset-0 flex items-center">
+<div class="container mx-auto px-6">
+<div class="max-w-3xl">
+<h2 class="text-2xl font-semibold text-white mb-4">비즈니스 인텔리전스</h2>
+<h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-white leading-tight">Data-Driven Innovation</h1>
+<p class="text-xl text-white/90 mb-12">데이터 기반의 의사결정으로 비즈니스 혁신 달성<br>AI 기반 분석으로 더 나은 미래를 준비하세요</p>
+<button class="bg-primary hover:bg-blue-600 text-white text-lg px-10 py-4 !rounded-button shadow-xl whitespace-nowrap transition-all duration-300">솔루션 소개</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Navigation Dots -->
+<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
+<button class="w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-colors duration-300" data-nav="1"></button>
+<button class="w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-colors duration-300" data-nav="2"></button>
+<button class="w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-colors duration-300" data-nav="3"></button>
+</div>
+<!-- Arrow Navigation -->
+<button class="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white/75 hover:text-white z-20" id="prevSlide">
+<i class="ri-arrow-left-line text-3xl"></i>
+</button>
+<button class="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white/75 hover:text-white z-20" id="nextSlide">
+<i class="ri-arrow-right-line text-3xl"></i>
+</button>
 </div>
 </section>
 <!-- 핵심 모듈 소개 -->
 <section class="py-24 bg-gradient-to-b from-white to-gray-50">
 <div class="container mx-auto px-6">
 <div class="text-center mb-20">
-<h2 class="section-heading text-4xl font-bold mb-6">핵심 모듈 소개</h2>
-<p class="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">비즈니스 운영에 필요한 모든 기능을 하나의 플랫폼에서 이용하세요.</p>
-<div class="inline-block bg-gradient-to-r from-primary/10 to-secondary/10 text-primary px-6 py-2 rounded-full mt-6 text-sm font-medium border border-primary/20 shadow-sm">+ 40,000 여 개 앱스토어 모듈</div>
+<h2 class="section-heading text-4xl font-bold mb-6">JK소프트랩 솔루션</h2>
+<p class="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">기업의 디지털 혁신을 위한 통합 솔루션을 제공합니다</p>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<!-- 모듈 1 -->
-<div class="bg-white p-8 rounded-lg shadow-md card-hover backdrop-blur-sm bg-white/90">
-<div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-<i class="ri-customer-service-2-line text-primary text-2xl"></i>
-</div>
-<h3 class="text-xl font-bold mb-2">CRM</h3>
-<p class="text-gray-600">고객 파이프라인을 시각화하여 영업 속도 향상</p>
-</div>
-<!-- 모듈 2 -->
-<div class="bg-white p-8 rounded-lg shadow-md card-hover backdrop-blur-sm bg-white/90">
-<div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-<i class="ri-bank-card-line text-primary text-2xl"></i>
-</div>
-<h3 class="text-xl font-bold mb-2">회계</h3>
-<p class="text-gray-600">세금, 송장, 재무 보고를 자동화</p>
-</div>
-<!-- 모듈 3 -->
-<div class="bg-white p-8 rounded-lg shadow-md card-hover backdrop-blur-sm bg-white/90">
-<div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-<i class="ri-store-2-line text-primary text-2xl"></i>
-</div>
-<h3 class="text-xl font-bold mb-2">재고</h3>
-<p class="text-gray-600">실시간 재고 현황 및 구매 주문 통합 관리</p>
-</div>
-<!-- 모듈 4 -->
-<div class="bg-white p-8 rounded-lg shadow-md card-hover backdrop-blur-sm bg-white/90">
-<div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-<i class="ri-tools-line text-primary text-2xl"></i>
-</div>
-<h3 class="text-xl font-bold mb-2">제조(MRP)</h3>
-<p class="text-gray-600">작업 지시서·품질 체크·설비 유지보수까지</p>
-</div>
-<!-- 모듈 5 -->
-<div class="bg-white p-8 rounded-lg shadow-md card-hover backdrop-blur-sm bg-white/90">
-<div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-<i class="ri-team-line text-primary text-2xl"></i>
-</div>
-<h3 class="text-xl font-bold mb-2">인사(HR)</h3>
-<p class="text-gray-600">채용부터 급여·휴가까지 직원 Lifecycle 관리</p>
-</div>
-<!-- 모듈 6 -->
-<div class="bg-white p-8 rounded-lg shadow-md card-hover backdrop-blur-sm bg-white/90">
-<div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-<i class="ri-calendar-check-line text-primary text-2xl"></i>
-</div>
-<h3 class="text-xl font-bold mb-2">프로젝트</h3>
-<p class="text-gray-600">간트 차트와 일정 Kanban으로 업무 진행률 확인</p>
-</div>
+<div class="relative">
+  <div class="solutions-slider overflow-hidden">
+    <div class="solutions-track flex transition-transform duration-500">
+      <!-- 솔루션 1 -->
+      <div class="solution-slide w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4">
+        <div class="relative group overflow-hidden rounded-lg h-[500px]">
+          <img src="https://readdy.ai/api/search-image?query=modern%20enterprise%20resource%20planning%20system%20interface%20with%20clean%20design%2C%20showing%20various%20business%20modules%20and%20real-time%20analytics%2C%20professional%20corporate%20software&width=600&height=400&seq=12345&orientation=landscape" alt="Odoo ERP" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+            <div class="absolute bottom-0 left-0 p-8 w-full">
+              <div class="text-white mb-4">통합 비즈니스 플랫폼</div>
+              <h3 class="text-4xl font-bold text-white mb-4">Odoo ERP</h3>
+              <p class="text-gray-200 text-lg mb-6">CRM, 전자상거래, 회계, 재고, POS 등 통합 비즈니스 솔루션</p>
+              <button class="bg-white/20 hover:bg-white/30 text-white px-6 py-3 !rounded-button backdrop-blur-sm transition-all duration-300">자세히 보기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 솔루션 2 -->
+      <div class="solution-slide w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4">
+        <div class="relative group overflow-hidden rounded-lg h-[500px]">
+          <img src="https://readdy.ai/api/search-image?query=professional%20IT%20consulting%20meeting%20room%20with%20modern%20technology%20displays%20showing%20business%20analytics%20and%20strategy%20planning%2C%20corporate%20environment&width=600&height=400&seq=12346&orientation=landscape" alt="ICT Consulting" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+            <div class="absolute bottom-0 left-0 p-8 w-full">
+              <div class="text-white mb-4">전문 컨설팅</div>
+              <h3 class="text-4xl font-bold text-white mb-4">ICT Consulting</h3>
+              <p class="text-gray-200 text-lg mb-6">기업정보화 전략(ISP) 수립, BPR, PMO 구축 서비스</p>
+              <button class="bg-white/20 hover:bg-white/30 text-white px-6 py-3 !rounded-button backdrop-blur-sm transition-all duration-300">자세히 보기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 솔루션 3 -->
+      <div class="solution-slide w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4">
+        <div class="relative group overflow-hidden rounded-lg h-[500px]">
+          <img src="https://readdy.ai/api/search-image?query=modern%20system%20integration%20and%20maintenance%20facility%20with%20server%20rooms%20and%20monitoring%20displays%2C%20professional%20IT%20infrastructure&width=600&height=400&seq=12347&orientation=landscape" alt="SI 통합" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+            <div class="absolute bottom-0 left-0 p-8 w-full">
+              <div class="text-white mb-4">시스템 통합</div>
+              <h3 class="text-4xl font-bold text-white mb-4">SI 통합</h3>
+              <p class="text-gray-200 text-lg mb-6">기업 환경 분석부터 개발, 배포까지 전문 SI 구축 서비스</p>
+              <button class="bg-white/20 hover:bg-white/30 text-white px-6 py-3 !rounded-button backdrop-blur-sm transition-all duration-300">자세히 보기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 솔루션 4 -->
+      <div class="solution-slide w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4">
+        <div class="relative group overflow-hidden rounded-lg h-[500px]">
+          <img src="https://readdy.ai/api/search-image?query=human%20resources%20management%20system%20interface%2C%20professional%20HR%20dashboard%20with%20employee%20profiles%2C%20modern%20corporate%20design&width=600&height=400&seq=12346&orientation=landscape" alt="UNIHR" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+            <div class="absolute bottom-0 left-0 p-8 w-full">
+              <div class="text-white mb-4">기업 인사 솔루션</div>
+              <h3 class="text-4xl font-bold text-white mb-4">UNIHR</h3>
+              <p class="text-gray-200 text-lg mb-6">인사관리부터 급여계산까지 HR 업무를 효율적으로 관리합니다.</p>
+              <button class="bg-white/20 hover:bg-white/30 text-white px-6 py-3 !rounded-button backdrop-blur-sm transition-all duration-300">자세히 보기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 솔루션 5 -->
+      <div class="solution-slide w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4">
+        <div class="relative group overflow-hidden rounded-lg h-[500px]">
+          <img src="https://readdy.ai/api/search-image?query=warehouse%20management%20system%20interface%2C%20logistics%20dashboard%20with%20inventory%20tracking%2C%20modern%20enterprise%20software%20design&width=600&height=400&seq=12347&orientation=landscape" alt="UNIWMS" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent">
+            <div class="absolute bottom-0 left-0 p-8 w-full">
+              <div class="text-white mb-4">물류유통관리 솔루션</div>
+              <h3 class="text-4xl font-bold text-white mb-4">UNIWMS</h3>
+              <p class="text-gray-200 text-lg mb-6">창고관리부터 배송까지 물류 전 과정을 최적화합니다.</p>
+              <button class="bg-white/20 hover:bg-white/30 text-white px-6 py-3 !rounded-button backdrop-blur-sm transition-all duration-300">자세히 보기</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Navigation Arrows -->
+  <button class="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full text-white backdrop-blur-sm transition-all duration-300 z-10" id="prevSolution">
+    <i class="ri-arrow-left-line text-2xl"></i>
+  </button>
+  <button class="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-white/20 rounded-full text-white backdrop-blur-sm transition-all duration-300 z-10" id="nextSolution">
+    <i class="ri-arrow-right-line text-2xl"></i>
+  </button>
+  <!-- Navigation Dots -->
+  <div class="flex justify-center mt-8 space-x-2">
+    <button class="w-3 h-3 rounded-full bg-primary opacity-100 solution-dot" data-index="0"></button>
+    <button class="w-3 h-3 rounded-full bg-primary opacity-40 solution-dot" data-index="1"></button>
+    <button class="w-3 h-3 rounded-full bg-primary opacity-40 solution-dot" data-index="2"></button>
+    <button class="w-3 h-3 rounded-full bg-primary opacity-40 solution-dot" data-index="3"></button>
+    <button class="w-3 h-3 rounded-full bg-primary opacity-40 solution-dot" data-index="4"></button>
+  </div>
 </div>
 </div>
 </section>
@@ -240,123 +353,86 @@ outline: none;
 </div>
 </div>
 </section>
-<!-- 파트너/고객사 로고 -->
-<section class="py-16 bg-gray-50 overflow-hidden">
-<div class="container mx-auto px-6">
-<div class="text-center mb-10">
-<h2 class="text-3xl font-bold mb-4">신뢰할 수 있는 파트너</h2>
-<p class="text-gray-600">전 세계 수많은 기업들이 Odoo를 선택했습니다</p>
-</div>
-<div class="relative">
-<div class="flex partner-logos space-x-16 opacity-70">
-<div class="flex items-center justify-center min-w-[150px]">
-<div class="text-gray-500 font-medium flex items-center">
-<i class="ri-building-line mr-2 text-xl"></i>
-<span>Paracel</span>
-</div>
-</div>
-<div class="flex items-center justify-center min-w-[150px]">
-<div class="text-gray-500 font-medium flex items-center">
-<i class="ri-ship-line mr-2 text-xl"></i>
-<span>Port Cities</span>
-</div>
-</div>
-<div class="flex items-center justify-center min-w-[150px]">
-<div class="text-gray-500 font-medium flex items-center">
-<i class="ri-code-box-line mr-2 text-xl"></i>
-<span>Wedoo</span>
-</div>
-</div>
-<div class="flex items-center justify-center min-w-[150px]">
-<div class="text-gray-500 font-medium flex items-center">
-<i class="ri-cloud-line mr-2 text-xl"></i>
-<span>CloudTech</span>
-</div>
-</div>
-<div class="flex items-center justify-center min-w-[150px]">
-<div class="text-gray-500 font-medium flex items-center">
-<i class="ri-global-line mr-2 text-xl"></i>
-<span>GlobalSys</span>
-</div>
-</div>
-<div class="flex items-center justify-center min-w-[150px]">
-<div class="text-gray-500 font-medium flex items-center">
-<i class="ri-rocket-line mr-2 text-xl"></i>
-<span>LaunchPad</span>
-</div>
-</div>
-<!-- 복제된 로고들 (무한 스크롤 효과를 위해) -->
-<div class="flex items-center justify-center min-w-[150px]">
-<div class="text-gray-500 font-medium flex items-center">
-<i class="ri-building-line mr-2 text-xl"></i>
-<span>Paracel</span>
-</div>
-</div>
-<div class="flex items-center justify-center min-w-[150px]">
-<div class="text-gray-500 font-medium flex items-center">
-<i class="ri-ship-line mr-2 text-xl"></i>
-<span>Port Cities</span>
-</div>
-</div>
-<div class="flex items-center justify-center min-w-[150px]">
-<div class="text-gray-500 font-medium flex items-center">
-<i class="ri-code-box-line mr-2 text-xl"></i>
-<span>Wedoo</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
 <!-- 성공사례 섹션 -->
-<section class="py-20 bg-white">
+<section class="py-20 bg-gray-50">
 <div class="container mx-auto px-6">
 <div class="text-center mb-16">
 <h2 class="text-3xl font-bold mb-4">고객 성공 사례</h2>
-<p class="text-gray-600 max-w-2xl mx-auto">실제 고객들의 Odoo 도입 후 비즈니스 성과를 확인하세요</p>
+<p class="text-gray-600 max-w-2xl mx-auto">BIZENTRO와 함께하는 고객사들의 다양한 구축사례를 확인해보세요.</p>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 <!-- 성공사례 1 -->
-<div class="bg-white rounded-lg shadow-md overflow-hidden">
-<div class="relative h-56 bg-gray-200">
-<img src="https://readdy.ai/api/search-image?query=modern%20office%20environment%20with%20people%20working%20on%20computers%2C%20business%20meeting%2C%20professional%20setting%2C%20high%20quality%20corporate%20image&width=600&height=400&seq=54321&orientation=landscape" alt="성공사례 1" class="w-full h-full object-cover object-top">
-<div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
-<button class="w-16 h-16 bg-white bg-opacity-80 rounded-full flex items-center justify-center">
-<i class="ri-play-fill text-primary text-3xl"></i>
-</button>
+<div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="relative h-48">
+<img src="https://readdy.ai/api/search-image?query=modern%20semiconductor%20manufacturing%20facility%20with%20advanced%20technology%20and%20clean%20room%20environment%2C%20professional%20industrial%20setting&width=400&height=300&seq=54321&orientation=landscape" alt="반도체 제조" class="w-full h-full object-cover">
+<div class="absolute top-4 left-4">
+<span class="bg-blue-100 text-primary px-3 py-1 rounded-full text-sm font-medium">반도체 제조</span>
 </div>
 </div>
 <div class="p-6">
-<h3 class="text-xl font-bold mb-2">대한물류 주식회사</h3>
-<p class="text-gray-600 mb-4">"Odoo 도입 후 물류 관리 효율이 30% 향상되었으며, 재고 관리 오류가 90% 감소했습니다."</p>
+<h3 class="text-lg font-bold mb-3">SK하이닉스</h3>
+<p class="text-gray-600 text-sm mb-4">UNIBI 도입으로 생산성 30% 향상 및 불량률 50% 감소 달성</p>
+<div class="flex justify-between items-center">
 <div class="flex items-center">
-<img src="https://readdy.ai/api/search-image?query=professional%20asian%20businessman%20portrait%2C%20formal%20attire%2C%20corporate%20headshot%2C%20neutral%20background&width=100&height=100&seq=98765&orientation=squarish" alt="김성민 이사" class="w-10 h-10 rounded-full object-cover mr-3">
+<img src="https://readdy.ai/api/search-image?query=professional%20korean%20businessman%20in%20suit%2C%20corporate%20headshot%2C%20neutral%20background&width=100&height=100&seq=98765&orientation=squarish" alt="이상준 부장" class="w-8 h-8 rounded-full object-cover mr-2">
 <div>
-<p class="font-medium">김성민 이사</p>
-<p class="text-sm text-gray-500">물류 운영 총괄</p>
+<p class="text-sm font-medium">이상준 부장</p>
+<p class="text-xs text-gray-500">생산관리팀</p>
 </div>
+</div>
+<button class="text-primary hover:text-blue-600">
+<i class="ri-arrow-right-line text-xl"></i>
+</button>
 </div>
 </div>
 </div>
 <!-- 성공사례 2 -->
-<div class="bg-white rounded-lg shadow-md overflow-hidden">
-<div class="relative h-56 bg-gray-200">
-<img src="https://readdy.ai/api/search-image?query=tech%20startup%20office%20with%20diverse%20team%20working%20together%2C%20modern%20workspace%2C%20creative%20environment%2C%20high%20quality%20corporate%20image&width=600&height=400&seq=67890&orientation=landscape" alt="성공사례 2" class="w-full h-full object-cover object-top">
-<div class="absolute inset-0 bg-black bg-opacity-20 flex items-center justify-center">
-<button class="w-16 h-16 bg-white bg-opacity-80 rounded-full flex items-center justify-center">
-<i class="ri-play-fill text-primary text-3xl"></i>
-</button>
+<div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="relative h-48">
+<img src="https://readdy.ai/api/search-image?query=modern%20automotive%20manufacturing%20plant%20with%20robotic%20assembly%20lines%2C%20high-tech%20industrial%20facility&width=400&height=300&seq=67890&orientation=landscape" alt="자동차 부품" class="w-full h-full object-cover">
+<div class="absolute top-4 left-4">
+<span class="bg-blue-100 text-primary px-3 py-1 rounded-full text-sm font-medium">자동차 부품</span>
 </div>
 </div>
 <div class="p-6">
-<h3 class="text-xl font-bold mb-2">테크노바 솔루션즈</h3>
-<p class="text-gray-600 mb-4">"Odoo의 프로젝트 관리 모듈 덕분에 개발 주기가 25% 단축되고 팀 협업이 크게 향상되었습니다."</p>
+<h3 class="text-lg font-bold mb-3">현대모비스</h3>
+<p class="text-gray-600 text-sm mb-4">UNIWMS 구축으로 물류비용 25% 절감 및 재고 정확도 99.9% 달성</p>
+<div class="flex justify-between items-center">
 <div class="flex items-center">
-<img src="https://readdy.ai/api/search-image?query=professional%20asian%20businesswoman%20portrait%2C%20formal%20attire%2C%20corporate%20headshot%2C%20neutral%20background&width=100&height=100&seq=43210&orientation=squarish" alt="박지연 대표" class="w-10 h-10 rounded-full object-cover mr-3">
+<img src="https://readdy.ai/api/search-image?query=professional%20korean%20businesswoman%20in%20formal%20attire%2C%20corporate%20headshot%2C%20neutral%20background&width=100&height=100&seq=43210&orientation=squarish" alt="김미영 차장" class="w-8 h-8 rounded-full object-cover mr-2">
 <div>
-<p class="font-medium">박지연 대표</p>
-<p class="text-sm text-gray-500">CEO</p>
+<p class="text-sm font-medium">김미영 차장</p>
+<p class="text-xs text-gray-500">물류혁신팀</p>
 </div>
+</div>
+<button class="text-primary hover:text-blue-600">
+<i class="ri-arrow-right-line text-xl"></i>
+</button>
+</div>
+</div>
+</div>
+<!-- 성공사례 3 -->
+<div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+<div class="relative h-48">
+<img src="https://readdy.ai/api/search-image?query=modern%20chemical%20research%20laboratory%20with%20advanced%20equipment%20and%20scientists%20working%2C%20professional%20scientific%20setting&width=400&height=300&seq=11223&orientation=landscape" alt="화학 제조" class="w-full h-full object-cover">
+<div class="absolute top-4 left-4">
+<span class="bg-blue-100 text-primary px-3 py-1 rounded-full text-sm font-medium">화학 제조</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-lg font-bold mb-3">LG화학</h3>
+<p class="text-gray-600 text-sm mb-4">UNIHR 도입으로 인사관리 효율성 40% 개선 및 임직원 만족도 상승</p>
+<div class="flex justify-between items-center">
+<div class="flex items-center">
+<img src="https://readdy.ai/api/search-image?query=professional%20korean%20businessman%20in%20modern%20suit%2C%20corporate%20headshot%2C%20neutral%20background&width=100&height=100&seq=33445&orientation=squarish" alt="박준호 팀장" class="w-8 h-8 rounded-full object-cover mr-2">
+<div>
+<p class="text-sm font-medium">박준호 팀장</p>
+<p class="text-xs text-gray-500">HR혁신팀</p>
+</div>
+</div>
+<button class="text-primary hover:text-blue-600">
+<i class="ri-arrow-right-line text-xl"></i>
+</button>
 </div>
 </div>
 </div>
@@ -403,54 +479,13 @@ outline: none;
 </div>
 </div>
 </section>
-<!-- 블로그 섹션 -->
-<section class="py-20 bg-yellow-50">
-<div class="container mx-auto px-6">
-<div class="text-center mb-16">
-<h2 class="text-3xl font-bold mb-4">최신 블로그</h2>
-<p class="text-gray-600 max-w-2xl mx-auto">Odoo 활용 팁과 비즈니스 인사이트를 확인하세요</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-<!-- 블로그 1 -->
-<div class="bg-white rounded-lg shadow-md overflow-hidden">
-<img src="https://readdy.ai/api/search-image?query=business%20analytics%20dashboard%20on%20computer%20screen%2C%20data%20visualization%2C%20professional%20business%20setting&width=400&height=250&seq=11223&orientation=landscape" alt="블로그 1" class="w-full h-48 object-cover object-top">
-<div class="p-6">
-<div class="text-sm text-gray-500 mb-2">2025년 4월 20일</div>
-<h3 class="text-xl font-bold mb-2">Odoo 대시보드 활용 팁 10가지</h3>
-<p class="text-gray-600 mb-4">효율적인 비즈니스 관리를 위한 Odoo 대시보드 커스터마이징 방법을 알아보세요.</p>
-<a href="#" class="text-primary font-medium hover:underline">자세히 보기</a>
-</div>
-</div>
-<!-- 블로그 2 -->
-<div class="bg-white rounded-lg shadow-md overflow-hidden">
-<img src="https://readdy.ai/api/search-image?query=inventory%20management%20system%20in%20warehouse%2C%20logistics%2C%20supply%20chain%20management&width=400&height=250&seq=33445&orientation=landscape" alt="블로그 2" class="w-full h-48 object-cover object-top">
-<div class="p-6">
-<div class="text-sm text-gray-500 mb-2">2025년 4월 15일</div>
-<h3 class="text-xl font-bold mb-2">재고 관리 자동화로 비용 절감하기</h3>
-<p class="text-gray-600 mb-4">Odoo 재고 관리 모듈을 활용한 자동화 전략과 비용 절감 사례를 소개합니다.</p>
-<a href="#" class="text-primary font-medium hover:underline">자세히 보기</a>
-</div>
-</div>
-<!-- 블로그 3 -->
-<div class="bg-white rounded-lg shadow-md overflow-hidden">
-<img src="https://readdy.ai/api/search-image?query=business%20team%20meeting%2C%20collaboration%2C%20project%20planning%2C%20professional%20office%20environment&width=400&height=250&seq=55667&orientation=landscape" alt="블로그 3" class="w-full h-48 object-cover object-top">
-<div class="p-6">
-<div class="text-sm text-gray-500 mb-2">2025년 4월 10일</div>
-<h3 class="text-xl font-bold mb-2">Odoo로 원격 팀 관리하기</h3>
-<p class="text-gray-600 mb-4">하이브리드 근무 환경에서 Odoo를 활용한 효과적인 팀 관리 방법을 알아보세요.</p>
-<a href="#" class="text-primary font-medium hover:underline">자세히 보기</a>
-</div>
-</div>
-</div>
-</div>
-</section>
 <!-- 푸터 -->
 <footer class="bg-gray-900 text-white pt-16 pb-8">
 <div class="container mx-auto px-6">
 <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
 <!-- 회사 정보 -->
 <div>
-<h3 class="text-xl font-['Pacifico'] text-white mb-4">logo</h3>
+<img src="https://static.readdy.ai/image/4e1f287963bede77105917e828dee681/7be8abb80dd06d82eda71f8929d253a6.png" alt="JK Softlab" class="h-8 mb-4">
 <p class="text-gray-400 mb-4">모든 비즈니스를 위한 통합 솔루션</p>
 <div class="flex space-x-4">
 <a href="#" class="text-gray-400 hover:text-white">
@@ -523,6 +558,47 @@ outline: none;
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+// Solutions Slider
+const solutionsTrack = document.querySelector('.solutions-track');
+const solutionSlides = document.querySelectorAll('.solution-slide');
+const prevSolutionBtn = document.getElementById('prevSolution');
+const nextSolutionBtn = document.getElementById('nextSolution');
+const solutionDots = document.querySelectorAll('.solution-dot');
+let currentSolutionIndex = 0;
+const totalSolutions = solutionSlides.length;
+function updateSolutionsSlider(index) {
+  const slideWidth = solutionSlides[0].offsetWidth;
+  solutionsTrack.style.transform = `translateX(-${index * slideWidth}px)`;
+  
+  solutionDots.forEach((dot, i) => {
+    dot.style.opacity = i === index ? '1' : '0.4';
+  });
+}
+function nextSolution() {
+  currentSolutionIndex = (currentSolutionIndex + 1) % totalSolutions;
+  updateSolutionsSlider(currentSolutionIndex);
+}
+function prevSolution() {
+  currentSolutionIndex = (currentSolutionIndex - 1 + totalSolutions) % totalSolutions;
+  updateSolutionsSlider(currentSolutionIndex);
+}
+prevSolutionBtn.addEventListener('click', prevSolution);
+nextSolutionBtn.addEventListener('click', nextSolution);
+solutionDots.forEach((dot, index) => {
+  dot.addEventListener('click', () => {
+    currentSolutionIndex = index;
+    updateSolutionsSlider(currentSolutionIndex);
+  });
+});
+// Auto slide for solutions
+let solutionsInterval = setInterval(nextSolution, 5000);
+const solutionsSlider = document.querySelector('.solutions-slider');
+solutionsSlider.addEventListener('mouseenter', () => {
+  clearInterval(solutionsInterval);
+});
+solutionsSlider.addEventListener('mouseleave', () => {
+  solutionsInterval = setInterval(nextSolution, 5000);
+});
 // 스크롤 시 헤더 스타일 변경
 const header = document.querySelector('header');
 window.addEventListener('scroll', function() {
@@ -532,6 +608,82 @@ header.classList.add('shadow-md');
 header.classList.remove('shadow-md');
 }
 });
+// Slider functionality
+let currentSlide = 1;
+const totalSlides = 3;
+const slides = document.querySelectorAll('.slide');
+const navDots = document.querySelectorAll('[data-nav]');
+const prevButton = document.getElementById('prevSlide');
+const nextButton = document.getElementById('nextSlide');
+function showSlide(slideNumber) {
+slides.forEach(slide => {
+slide.style.opacity = '0';
+slide.style.zIndex = '0';
+});
+navDots.forEach(dot => {
+dot.classList.remove('bg-white');
+dot.classList.add('bg-white/50');
+});
+const activeSlide = document.querySelector(`[data-slide="${slideNumber}"]`);
+const activeDot = document.querySelector(`[data-nav="${slideNumber}"]`);
+if (activeSlide && activeDot) {
+activeSlide.style.opacity = '1';
+activeSlide.style.zIndex = '1';
+activeDot.classList.remove('bg-white/50');
+activeDot.classList.add('bg-white');
+}
+}
+function nextSlide() {
+currentSlide = currentSlide >= totalSlides ? 1 : currentSlide + 1;
+showSlide(currentSlide);
+}
+function prevSlide() {
+currentSlide = currentSlide <= 1 ? totalSlides : currentSlide - 1;
+showSlide(currentSlide);
+}
+// Event listeners
+prevButton.addEventListener('click', prevSlide);
+nextButton.addEventListener('click', nextSlide);
+navDots.forEach(dot => {
+dot.addEventListener('click', () => {
+currentSlide = parseInt(dot.getAttribute('data-nav'));
+showSlide(currentSlide);
+});
+});
+// Auto slide
+let slideInterval = setInterval(nextSlide, 5000);
+// Pause auto slide on hover
+const sliderContainer = document.querySelector('.slider-container');
+sliderContainer.addEventListener('mouseenter', () => {
+clearInterval(slideInterval);
+});
+sliderContainer.addEventListener('mouseleave', () => {
+slideInterval = setInterval(nextSlide, 5000);
+});
+// Show initial slide
+showSlide(1);
+// 파티클 애니메이션
+const heroSection = document.querySelector('.hero-section');
+function createParticle() {
+const particle = document.createElement('div');
+particle.className = 'particle';
+particle.style.left = Math.random() * 100 + '%';
+particle.style.animationDuration = (Math.random() * 3 + 4) + 's';
+particle.style.animationName = 'float-up';
+particle.style.animationTimingFunction = 'ease-in-out';
+heroSection.appendChild(particle);
+particle.addEventListener('animationend', () => {
+particle.remove();
+});
+}
+// 초기 파티클 생성
+for(let i = 0; i < 15; i++) {
+createParticle();
+}
+// 주기적으로 새로운 파티클 생성
+setInterval(() => {
+createParticle();
+}, 500);
 });
 </script>
 </body>
